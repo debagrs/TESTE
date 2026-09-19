@@ -1,0 +1,132 @@
+{
+  "projectName": "contrastes",
+  "summary": "Obra de arte interativa web baseada em React, TypeScript e p5.js que explora o dualismo e o contraste político através de partículas cromáticas polares que se misturam, tencionam e evoluem com a interação do usuário (mouse, toque e opcionalmente presença por câmera).",
+  "architectureSummary": "Single Page Application (SPA) em React com Vite e Tailwind CSS, incorporando um laboratório de arte interativa em canvas (p5.js), painel de controle conceitual, seletor de paletas de polarização ideológica/política e menu de reflexão pedagógica alinhado aos ODS 3, 4 e 8.",
+  "implementationBrief": "Desenvolver interface imersiva com tela cheia para a obra interativa 'Contrastes', oferecendo controles de sensibilidade de partículas, alternância de pares de cores contrastantes (Preto/Branco, Vermelho/Azul, Amarelo/Roxo, Verde/Magenta), modo de simulação de presença (câmera WebRTC ou rastreamento de movimento simulado), painel de artistas/educadores com notas conceituais (Vilém Flusser, Yuk Hui) e persistência de preferências via localStorage.",
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "p5",
+    "lucide-react",
+    "canvas-confetti"
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "purpose": "Tela principal da obra de arte interativa com o canvas de partículas em tela cheia, painel flutuante de controle de tensão, seleção de paletas e status de interação."
+    },
+    {
+      "path": "/manifesto",
+      "purpose": "Página conceitual e pedagógica detalhando a fundamentação científica (Vilém Flusser, Yuk Hui), ODS associados (3, 4, 8) e orientações para professores e crianças."
+    }
+  ],
+  "dataModel": [
+    {
+      "name": "ColorPair",
+      "purpose": "Representa os polos ideológicos e cromáticos da obra.",
+      "fields": [
+        "id: string",
+        "name: string",
+        "leftName: string",
+        "rightName: string",
+        "color1: [number, number, number]",
+        "color2: [number, number, number]",
+        "description: string"
+      ]
+    },
+    {
+      "name": "ArtworkSettings",
+      "purpose": "Configurações ajustáveis pelo usuário para o comportamento das partículas.",
+      "fields": [
+        "particleCount: number",
+        "attractionForce: number",
+        "friction: number",
+        "cameraMode: boolean",
+        "soundEnabled: boolean",
+        "activePaletteId: string"
+      ]
+    }
+  ],
+  "designSystem": {
+    "direction": "Dark mode imersivo com acentos cromáticos vibrantes que remetem às polarizações políticas e artísticas (vermelho, azul, amarelo, roxo, verde, magenta, preto e branco puro).",
+    "tokens": [
+      "bg-canvas: #0f0f14",
+      "panel-glass: rgba(20, 20, 30, 0.8)",
+      "accent-primary: #ec4899",
+      "accent-secondary: #3b82f6",
+      "text-main: #f3f4f6",
+      "text-muted: #9ca3af"
+    ],
+    "responsive": "Layout responsivo com ocultação automática de painéis laterais em dispositivos móveis, permitindo experiência full-screen touch.",
+    "accessibility": "Suporte a navegação por teclado, alto contraste nos botões de controle, legendas descritivas e alternativas de interação por toque e mouse."
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "purpose": "Dependências do projeto incluindo react, p5, lucide-react, tailwindcss e tipos."
+    },
+    {
+      "path": "index.html",
+      "purpose": "HTML raiz com fontes do Google Fonts e título da obra."
+    },
+    {
+      "path": "src/main.tsx",
+      "purpose": "Ponto de entrada React montando o App."
+    },
+    {
+      "path": "src/App.tsx",
+      "purpose": "Componente raiz gerenciando rotas (Canvas / Manifesto) e estado global das configurações."
+    },
+    {
+      "path": "src/index.css",
+      "purpose": "Estilos globais, diretivas Tailwind e animações customizadas."
+    },
+    {
+      "path": ".env.example",
+      "purpose": "Variáveis de ambiente de exemplo para integrações opcionais."
+    },
+    {
+      "path": "README.md",
+      "purpose": "Documentação completa do projeto, instruções de execução e pressupostos pedagógicos."
+    },
+    {
+      "path": "src/types.ts",
+      "purpose": "Definições de tipos TypeScript para paletas, configurações e partículas."
+    },
+    {
+      "path": "src/constants/palettes.ts",
+      "purpose": "Exporta os pares de cores contrastantes e seus significados políticos/sociais."
+    },
+    {
+      "path": "src/components/Navbar.tsx",
+      "purpose": "Barra de navegação superior minimalista e flutuante para alternar entre a Obra e o Manifesto."
+    },
+    {
+      "path": "src/components/ArtworkCanvas.tsx",
+      "purpose": "Componente wrapper do p5.js que instancia o sketch interativo de partículas, gerencia redimensionamento e captura de mouse/toque/câmera."
+    },
+    {
+      "path": "src/components/ControlPanel.tsx",
+      "purpose": "Painel flutuante de controle com seletores de paletas, sliders de força, contagem de partículas e ativação de modo câmera."
+    },
+    {
+      "path": "src/components/ManifestoView.tsx",
+      "purpose": "Visualizador de textos conceituais, alinhamento com ODS 3, 4 e 8, e reflexões inspiradas em Vilém Flusser e Yuk Hui."
+    },
+    {
+      "path": "src/hooks/useArtworkSettings.ts",
+      "purpose": "Hook customizado para persistir e gerenciar preferências do usuário no localStorage."
+    }
+  ],
+  "assumptions": [
+    "A captura por câmera é opcional e utiliza a API nativa navigator.mediaDevices.getUserMedia com análise de brilho por frame para estimar o centro de massa do usuário caso não haja mouse/toque ativo.",
+    "O p5.js será executado em modo instância para evitar conflitos com o ciclo de vida do React."
+  ],
+  "postGenerationChecks": [
+    "Executar npm run build para validar a ausência de erros de TypeScript.",
+    "Garantir responsividade em telas móveis e desktop.",
+    "Verificar se o sketch do p5.js limpa corretamente seus recursos ao desmontar o componente."
+  ]
+}
