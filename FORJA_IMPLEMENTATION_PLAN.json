@@ -1,0 +1,120 @@
+{
+  "projectName": "contrastes-obra-interativa",
+  "summary": "Obra de arte interativa 'CONTRASTES' baseada na Metodologia 5I's, explorando o dualismo político e de ideias através de partículas de cores contrastantes que se misturam, ganham formas impressionistas e respondem ao mouse, toque ou câmera.",
+  "architectureSummary": "Aplicação SPA em React + Vite + TypeScript, estilizada com Tailwind CSS e ícones Lucide-react, integrando motor gráfico interativo em p5.js ou Canvas 2D avançado para simulação de partículas polares e suporte a webcam para rastreamento de presença.",
+  "implementationBrief": "Desenvolver interface imersiva com tela cheia para a obra de arte interativa, painel de controle flutuante para troca de paletas ideológicas (Preto/Branco, Vermelho/Azul, Amarelo/Roxo, Verde/Magenta), modos de interação (Mouse/Toque, Câmera de Presença), seletor de sensibilidade, e modal explicativo sobre os ODS (3, 4, 8) e contexto poético/filosófico.",
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "Lucide React",
+    "p5"
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "purpose": "Tela principal da obra interativa com canvas em tela cheia, HUD flutuante de controle de paletas, modo de captura (mouse/toque/câmera) e botão para abrir manifesto/sobre."
+    }
+  ],
+  "dataModel": [
+    {
+      "name": "ColorPair",
+      "purpose": "Define o par de cores contrastantes representando os polos ideológicos.",
+      "fields": [
+        "id: string",
+        "name: string",
+        "c1: [number, number, number]",
+        "c2: [number, number, number]",
+        "description: string"
+      ]
+    },
+    {
+      "name": "InteractionConfig",
+      "purpose": "Configurações da simulação de partículas e interação.",
+      "fields": [
+        "mode: 'mouse' | 'touch' | 'camera'",
+        "particleCount: number",
+        "turbulence: number",
+        "impressionistMode: boolean"
+      ]
+    }
+  ],
+  "designSystem": {
+    "direction": "Dark mode imersivo com acentos cromáticos vibrantes refletindo a polaridade e o impressionismo.",
+    "tokens": [
+      "bg-canvas: #0f0f14",
+      "text-primary: #f8fafc",
+      "accent-polar-1: #d21e1e",
+      "accent-polar-2: #1e5ad2",
+      "hud-bg: rgba(15, 15, 20, 0.8)",
+      "hud-border: rgba(255, 255, 255, 0.1)"
+    ],
+    "responsive": "Totalmente responsivo para desktops, tablets e smartphones com suporte a toque multi-ponto e redimensionamento dinâmico do canvas.",
+    "accessibility": "Suporte a navegação por teclado nos controles flutuantes, contraste adequado em textos e descrições ARIA para leitores de tela na obra."
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "purpose": "Dependências do projeto incluindo react, lucide-react, p5, tailwindcss, clsx, tailwind-merge."
+    },
+    {
+      "path": "tsconfig.json",
+      "purpose": "Configuração TypeScript para Vite e React."
+    },
+    {
+      "path": "tsconfig.node.json",
+      "purpose": "Configuração TypeScript para o ambiente Node/Vite."
+    },
+    {
+      "path": "index.html",
+      "purpose": "Ponto de entrada HTML com título da obra e fontes importadas."
+    },
+    {
+      "path": "src/main.tsx",
+      "purpose": "Montagem da aplicação React no elemento root."
+    },
+    {
+      "path": "src/App.tsx",
+      "purpose": "Componente raiz gerenciando o estado global da obra, paletas ativas, modos de interação e exibição da HUD e Modais."
+    },
+    {
+      "path": "src/index.css",
+      "purpose": "Estilos globais, diretivas Tailwind e animações customizadas."
+    },
+    {
+      "path": "README.md",
+      "purpose": "Documentação da obra de arte interativa CONTRASTES, instruções de uso e contexto ODS."
+    },
+    {
+      "path": ".env.example",
+      "purpose": "Exemplo de variáveis de ambiente."
+    },
+    {
+      "path": "src/types/index.ts",
+      "purpose": "Exporta interfaces TypeScript para paletas de cores, configurações e estados de interação."
+    },
+    {
+      "path": "src/components/InteractiveCanvas.tsx",
+      "purpose": "Componente encapsulando a simulação p5.js com partículas, detecção de mouse/toque/câmera e mistura impressionista."
+    },
+    {
+      "path": "src/components/HUDControl.tsx",
+      "purpose": "Barra de controle flutuante para alternar paletas de cores, pausar, resetar partículas e trocar modo de interação."
+    },
+    {
+      "path": "src/components/AboutModal.tsx",
+      "purpose": "Modal explicativo detalhando a proposta artística, referências aos ODS 3, 4 e 8 e metodologia 5I's."
+    },
+    {
+      "path": "src/components/CameraPresence.tsx",
+      "purpose": "Gerencia o fluxo opcional de captura de presença via webcam para influenciar as partículas com movimento físico."
+    }
+  ],
+  "assumptions": [
+    "O navegador do usuário possui suporte para Canvas 2D e WebGL.",
+    "O uso da câmera de presença é opcional e requer permissão do usuário via API getUserMedia.",
+    "A biblioteca p5.js será carregada em modo instância para evitar conflitos no React."
+  ],
+  "postGenerationChecks": []
+}
